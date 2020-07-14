@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
-//const cors = require("cors");
+const cors = require("cors");
 require("dotenv").config();
 
 const apiRouter = require("./routes/api");
@@ -26,7 +26,16 @@ mongoose
 // EXPRESS SERVER INSTANCE
 const app = express();
 
+// CORS SETTINGS
+app.use(
+  cors({
+    credentials: true,
+    origin: [process.env.PUBLIC_DOMAIN],
+  }));
+
 // SESSION MIDDLEWARE
+// checks if cookie with session exists on HHTP req and if it does
+// verifies it and gets user data and assigns it to 'req.session.currentUser'
 app.use(
   session({
     store: new MongoStore({
@@ -46,7 +55,9 @@ app.use(
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -64,7 +75,9 @@ app.use("/auth", authRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
-  res.status(404).json({ code: "not found" });
+  res.status(404).json({
+    code: "not found"
+  });
 });
 
 // error handler

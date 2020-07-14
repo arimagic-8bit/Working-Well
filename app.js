@@ -62,7 +62,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // ROUTER MIDDLEWARE
-app.use("/", apiRouter);
+app.use("/api", apiRouter);
 app.use("/auth", authRouter);
 
 // ROUTE FOR SERVING REACT APP (index.html)

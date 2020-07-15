@@ -66,10 +66,10 @@ app.use("/api", apiRouter);
 app.use("/auth", authRouter);
 
 // ROUTE FOR SERVING REACT APP (index.html)
-// app.use((req, res) => {
-//   // If no routes match, send them the React HTML.
-//   res.sendFile(__dirname + "/public/index.html");
-// });
+app.use((req, res) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 // ERROR HANDLING
 

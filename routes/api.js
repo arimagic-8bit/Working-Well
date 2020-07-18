@@ -7,12 +7,11 @@ const Activity = require("./../models/activities");
 
 // POST - creates activity in DB
 apiRouter.post("/activity", function (req, res, next) {
-  const { title, completion, rest } = req.body;
+  const { title, completion} = req.body;
 
   Activity.create({
     title,
     completion,
-    rest,
   })
     .then((activity) => {
       res.status(201).json(activity);
@@ -41,7 +40,7 @@ apiRouter.get("/activity", function (req, res, next) {
 
 // UPDATE - edit an activity info
 apiRouter.put("/activity/:id", (req, res, next) => {
-  const { title, completion, rest } = req.body;
+  const { title, completion} = req.body;
 
   const activityId = req.params.id;
 
@@ -52,7 +51,6 @@ apiRouter.put("/activity/:id", (req, res, next) => {
     {
       title,
       completion,
-      rest,
     },
     {
       new: true,

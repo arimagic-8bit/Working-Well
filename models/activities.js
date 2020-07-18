@@ -7,13 +7,9 @@ const activitySchema = new Schema({
         required: true
     },
     completion: {
-        type: Number,
+        type: String,
         required: true
     },
-    rest: {
-        type: Number,
-        required: true
-    }
 });
 
 const Activity = mongoose.model('Activity', activitySchema);

@@ -20,7 +20,17 @@ apiRouter.post("/activity", function (req, res, next) {
     .catch((err) => res.status(500).json(err));
 });
 
-// GET - gives activity info
+// GET - get activity by id
+apiRouter.get("/activity/:id", function (req, res, next) {
+  const activityId = req.params.id;
+  Activity.findById({_id:activityId})
+  .then((activity) => {
+    res.status(200).json(activity);
+  })
+  .catch((err) => res.status(500).json(err))
+})
+
+// GET - gets all activities
 apiRouter.get("/activity", function (req, res, next) {
   Activity.find()
     .then((activities) => {

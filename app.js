@@ -31,7 +31,8 @@ app.use(
   cors({
     credentials: true,
     origin: [process.env.PUBLIC_DOMAIN],
-  }));
+  })
+);
 
 // SESSION MIDDLEWARE
 // checks if cookie with session exists on HHTP req and if it does
@@ -55,9 +56,11 @@ app.use(
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: false
-}));
+app.use(
+  express.urlencoded({
+    extended: false,
+  })
+);
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -76,7 +79,7 @@ app.use((req, res) => {
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   res.status(404).json({
-    code: "not found"
+    code: "not found",
   });
 });
 

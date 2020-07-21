@@ -5,7 +5,7 @@ const Activity = require("./../models/activities");
 
 // POST - creates activity in DB
 apiRouter.post("/activity", function (req, res, next) {
-  const { title, completion} = req.body;
+  const { title, completion } = req.body;
 
   Activity.create({
     title,
@@ -17,7 +17,6 @@ apiRouter.post("/activity", function (req, res, next) {
     .catch((err) => res.status(500).json(err));
 });
 
-
 // GET - gets all activities
 apiRouter.get("/activity", function (req, res, next) {
   Activity.find()
@@ -26,7 +25,6 @@ apiRouter.get("/activity", function (req, res, next) {
     })
     .catch((err) => res.status(500).json(err));
 });
-
 
 //DELETE - delete all activities from DB
 

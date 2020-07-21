@@ -1,18 +1,15 @@
 const express = require("express");
 const apiRouter = express.Router();
 
-const createError = require("http-errors");
-
 const Activity = require("./../models/activities");
 
 // POST - creates activity in DB
 apiRouter.post("/activity", function (req, res, next) {
-  const { title, completion, rest } = req.body;
+  const { title, completion} = req.body;
 
   Activity.create({
     title,
     completion,
-    rest,
   })
     .then((activity) => {
       res.status(201).json(activity);
@@ -20,15 +17,6 @@ apiRouter.post("/activity", function (req, res, next) {
     .catch((err) => res.status(500).json(err));
 });
 
-// GET - get activity by id
-apiRouter.get("/activity/:id", function (req, res, next) {
-  const activityId = req.params.id;
-  Activity.findById({_id:activityId})
-  .then((activity) => {
-    res.status(200).json(activity);
-  })
-  .catch((err) => res.status(500).json(err))
-})
 
 // GET - gets all activities
 apiRouter.get("/activity", function (req, res, next) {
@@ -39,44 +27,6 @@ apiRouter.get("/activity", function (req, res, next) {
     .catch((err) => res.status(500).json(err));
 });
 
-// UPDATE - edit an activity info
-apiRouter.put("/activity/:id", (req, res, next) => {
-  const { title, completion, rest } = req.body;
-
-  const activityId = req.params.id;
-
-  Activity.findByIdAndUpdate(
-    {
-      _id: activityId,
-    },
-    {
-      title,
-      completion,
-      rest,
-    },
-    {
-      new: true,
-    }
-  )
-    .then((updateActivity) => {
-      res.status(200).json(updateActivity);
-    })
-    .catch((err) => res.status(500).json(err));
-});
-
-// DELETE - delete one activity from DB
-
-apiRouter.post("/activity/:id/delete", (req, res, next) => {
-  const activityId = req.params.id;
-
-  Activity.findByIdAndRemove({
-    _id: activityId,
-  })
-    .then((removed) => {
-      res.status(200).json(removed);
-    })
-    .catch((err) => res.status(500).json(err));
-});
 
 //DELETE - delete all activities from DB
 
